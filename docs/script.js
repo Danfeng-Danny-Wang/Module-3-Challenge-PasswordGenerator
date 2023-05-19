@@ -34,7 +34,7 @@ function createPasswordOptions() {
   const ifNumeric = confirm("Include numbers?");
   const ifSpecialCharacters = confirm("Include special characters?");
 
-  const passwordCriteria = {
+  const passwordOptions = {
     length: passwordLength,
     lowercase: ifLowercase,
     uppercase: ifUppercase,
@@ -42,5 +42,5 @@ function createPasswordOptions() {
     specialChar: ifSpecialCharacters,
   };
 
-  return passwordCriteria;
+  return passwordOptions;
 }

@@ -47,6 +47,11 @@ function createPasswordOptions() {
   const ifNumeric = confirm("Include numbers?");
   const ifSpecialCharacters = confirm("Include special characters?");
 
+  if (!(ifLowercase || ifUppercase || ifNumeric || ifSpecialCharacters)) {
+    alert("Please try again; you have to select one option");
+    return null;
+  }
+
   const passwordOptions = {
     length: passwordLength,
     lowercase: ifLowercase,

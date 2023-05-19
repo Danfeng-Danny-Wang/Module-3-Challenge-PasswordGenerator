@@ -20,10 +20,25 @@ function generatePassword() {
   if (passwordOptions === null) return null;
 
   let password = "";
+  let n = 0;
+  let oneChar = "";
 
-  for (let i = 0; i < passwordOptions.length; i++) {
-    password = password + generateOneChar();
+  while (n < passwordOptions.length) {
+    oneChar = generateOneChar(passwordOptions);
+    if (oneChar !== false) {
+      password = password + oneChar;
+      n++;
+    }
   }
+
+  // for (let i = 1; i < passwordOptions.length + 1; i++) {
+  //   const oneChar = generateOneChar(passwordOptions);
+  //   if (oneChar === false) {
+  //     i--;
+  //   } else {
+  //     password = password + oneChar;
+  //   }
+  // }
   console.log(password);
   return password;
 }
@@ -54,6 +69,14 @@ function createPasswordOptions() {
   return passwordOptions;
 }
 
-function generateOneChar() {
-  return Math.floor(Math.random() * 10);
+function generateOneChar(passwordOptions) {
+  const randomNumber = Math.floor(Math.random() * 95) + 32;
+  console.log(randomNumber);
+
+  if (48 <= randomNumber <= 57 && !passwordOptions.numeric) return false;
+  else if (65 <= randomNumber <= 90 && !passwordOptions.uppercase) return false;
+  else if (97 <= randomNumber <= 122 && !passwordOptions.lowercase)
+    return false;
+  else if (!passwordOptions.specialChar) return false;
+  else return String.fromCharCode(randomNumber);
 }

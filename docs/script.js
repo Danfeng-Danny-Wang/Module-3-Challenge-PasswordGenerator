@@ -7,6 +7,7 @@ generateBtn.addEventListener("click", writePassword);
 // Write password to the #password input
 function writePassword() {
   const password = generatePassword();
+  if (password === null) return;
   const passwordText = document.querySelector("#password");
 
   passwordText.value = password;
@@ -15,8 +16,16 @@ function writePassword() {
 // Assignment code here
 function generatePassword() {
   const passwordOptions = createPasswordOptions();
+  console.log(passwordOptions);
+  if (passwordOptions === null) return null;
 
-  return JSON.stringify(passwordOptions);
+  let password = "";
+
+  for (let i = 0; i < passwordOptions.length; i++) {
+    password = password + generateOneChar();
+  }
+  console.log(password);
+  return password;
 }
 
 function createPasswordOptions() {
@@ -43,4 +52,8 @@ function createPasswordOptions() {
   };
 
   return passwordOptions;
+}
+
+function generateOneChar() {
+  return Math.floor(Math.random() * 10);
 }

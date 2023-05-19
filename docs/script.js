@@ -16,33 +16,19 @@ function writePassword() {
 // Assignment code here
 function generatePassword() {
   const passwordOptions = createPasswordOptions();
-  console.log(passwordOptions);
   if (passwordOptions === null) return null;
 
   let password = "";
   let n = 0;
-  let oneChar = "";
 
   while (n < passwordOptions.length) {
-    console.log("n= " + n);
-    oneChar = generateOneChar(passwordOptions);
-    console.log("oneChar =" + oneChar);
+    const oneChar = generateOneChar(passwordOptions);
     if (oneChar !== false) {
       password = password + oneChar;
       n++;
     }
-    console.log("password = " + password);
   }
 
-  // for (let i = 1; i < passwordOptions.length + 1; i++) {
-  //   const oneChar = generateOneChar(passwordOptions);
-  //   if (oneChar === false) {
-  //     i--;
-  //   } else {
-  //     password = password + oneChar;
-  //   }
-  // }
-  console.log(password);
   return password;
 }
 
@@ -73,40 +59,30 @@ function createPasswordOptions() {
 }
 
 function generateOneChar(passwordOptions) {
-  let randomNumber = 0;
-  let ifValid = false;
-  randomNumber = Math.floor(Math.random() * 95) + 32;
-  console.log("randomNumber = " + randomNumber);
+  let randomNumber = Math.floor(Math.random() * 95) + 32;
 
-  if (48 <= randomNumber && randomNumber <= 57 && passwordOptions.numeric) {
-    ifValid = true;
-    // console.log(ifValid);
-  } else if (
+  if (48 <= randomNumber && randomNumber <= 57 && passwordOptions.numeric)
+    return String.fromCharCode(randomNumber);
+  else if (
     65 <= randomNumber &&
     randomNumber <= 90 &&
     passwordOptions.uppercase
-  ) {
-    ifValid = true;
-    // console.log(ifValid);
-  } else if (
+  )
+    return String.fromCharCode(randomNumber);
+  else if (
     97 <= randomNumber &&
     randomNumber <= 122 &&
     passwordOptions.lowercase
-  ) {
-    ifValid = true;
-    console.log(ifValid);
-  } else if (
+  )
+    return String.fromCharCode(randomNumber);
+  else if (
     ((32 <= randomNumber && randomNumber <= 47) ||
       (58 <= randomNumber && randomNumber <= 64) ||
       (91 <= randomNumber && randomNumber <= 96) ||
       (123 <= randomNumber && randomNumber <= 126)) &&
     passwordOptions.specialChar
-  ) {
-    ifValid = true;
-    // console.log(ifValid);
-  }
+  )
+    return String.fromCharCode(randomNumber);
 
-  console.log(ifValid);
-  if (ifValid) return String.fromCharCode(randomNumber);
-  else return false;
+  return false;
 }

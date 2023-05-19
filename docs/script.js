@@ -16,7 +16,7 @@ function writePassword() {
 function generatePassword() {
   const passwordOptions = createPasswordOptions();
 
-  return passwordOptions;
+  return JSON.stringify(passwordOptions);
 }
 
 function createPasswordOptions() {
@@ -29,5 +29,18 @@ function createPasswordOptions() {
     return null;
   }
 
-  return passwordLength;
+  const ifLowercase = confirm("Include lowercase?");
+  const ifUppercase = confirm("Include uppercase?");
+  const ifNumeric = confirm("Include numbers?");
+  const ifSpecialCharacters = confirm("Include special characters?");
+
+  const passwordCriteria = {
+    length: passwordLength,
+    lowercase: ifLowercase,
+    uppercase: ifUppercase,
+    numeric: ifNumeric,
+    specialChar: ifSpecialCharacters,
+  };
+
+  return passwordCriteria;
 }
